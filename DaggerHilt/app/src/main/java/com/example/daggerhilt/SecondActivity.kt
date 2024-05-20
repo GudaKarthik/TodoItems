@@ -1,8 +1,10 @@
 package com.example.daggerhilt
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,17 +27,18 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @AndroidEntryPoint
-class SecondActivity : AppCompatActivity() {
+class SecondActivity : AppCompatActivity(),Click {
 
-    var TAG : String = "HILTT"
-    lateinit var txtHilt : TextView
+    var TAG: String = "HILTT"
+    lateinit var txtHilt: TextView
 
     @Inject
     lateinit var personName: PersonName
 
-    lateinit var recyclerview : RecyclerView
+    lateinit var recyclerview: RecyclerView
     lateinit var numberAdapter: NumberAdapter
-    val preRegistrationViewModel : PreRegistrationViewModel by viewModels()
+    val preRegistrationViewModel: PreRegistrationViewModel by viewModels()
+    var test: String = "Testing"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,49 +51,58 @@ class SecondActivity : AppCompatActivity() {
         preRegistrationViewModel.getConsumer("1")
 
         preRegistrationViewModel.plist.observe(this, Observer {
-            Log.d(TAG,"The response is $it")
-            numberAdapter = NumberAdapter(it.response!!.consumers)
+            Log.d(TAG, "The response is $it")
+            numberAdapter = NumberAdapter(it.response!!.consumers, this)
             recyclerview.adapter = numberAdapter
             recyclerview.layoutManager = LinearLayoutManager(this)
             numberAdapter.notifyDataSetChanged()
         })
 
+        preRegistrationViewModel.getProfile("14315")
+
 
     }
-}
 
-interface Details{
-    fun getName() : String
-}
 
-class Person
-@Inject
-constructor(var nameg: String) : Details{
-
-    override fun getName(): String {
-       return nameg
+    override fun onclick(data: PreRegistraionConsumers) {
+        Toast.makeText(this, data.id.toString(), Toast.LENGTH_SHORT).show()
+        var intent = Intent(this, ProfileViewActivity::class.java)
+        startActivity(intent)
     }
-}
 
-class PersonName
-@Inject
-constructor(var person: Person){
-    fun MyName() : String{
-        return person.getName()
+    interface Details {
+        fun getName(): String
     }
-}
 
-@Module
-@InstallIn(SingletonComponent::class)
-class NameModule{
+    class Person
+    @Inject
+    constructor(var nameg: String) : Details {
 
-    @Singleton
-    @Provides
-    fun tetName() : String = "Dependency"
+        override fun getName(): String {
+            return nameg
+        }
+    }
 
-    @Singleton
-    @Provides
-    fun hetName(jname : String) : Details = Person(jname)
+    class PersonName
+    @Inject
+    constructor(var person: Person) {
+        fun MyName(): String {
+            return person.getName()
+        }
+    }
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    class NameModule {
+
+        @Singleton
+        @Provides
+        fun tetName(): String = "Dependency"
+
+        @Singleton
+        @Provides
+        fun hetName(jname: String): Details = Person(jname)
+    }
 }
 
 

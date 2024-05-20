@@ -11,4 +11,9 @@ constructor(var apiService: ApiService){
         var ret = apiService.getConsumers(id)
          return ret!!.body()!!
     }
+
+    suspend fun getProfile(id : String) : PreregProfileResponse{
+        var prt = apiService.getConsumerProfile(id)
+        return prt.body()!!
+    }
 }

@@ -27,5 +27,4 @@ class MyModule {
     fun setService(retrofit: Retrofit) : ApiService{
         return retrofit.create(ApiService::class.java)
     }
-
 }
