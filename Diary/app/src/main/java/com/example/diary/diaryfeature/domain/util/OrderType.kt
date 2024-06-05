@@ -1,4 +1,8 @@
 package com.example.diary.diaryfeature.domain.util
 
-class OrderType {
+import androidx.room.FtsOptions.Order
+
+sealed class OrderType {
+    object Ascending : OrderType()
+    object Descending : OrderType()
 }

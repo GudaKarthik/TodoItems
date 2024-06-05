@@ -63,7 +63,6 @@ class SecondActivity : AppCompatActivity(),Click {
 
     }
 
-
     override fun onclick(data: PreRegistraionConsumers) {
         Toast.makeText(this, data.id.toString(), Toast.LENGTH_SHORT).show()
         var intent = Intent(this, ProfileViewActivity::class.java)
