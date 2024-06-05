@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Todo Item"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:textColor="#004a8e"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/black"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Todo Item"
+            android:textSize="14.5dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter text"
+            android:background="@drawable/edt"
+            android:layout_marginTop="13dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:id="@+id/edtUpdateTodoItem"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/amiko_semibold"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:backgroundTint="#008000"
+            android:background="@drawable/edt"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/btnUpdate"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
